@@ -12,3 +12,90 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+enum Genero {
+  ACAO
+  COMEDIA
+  DRAMA
+  TERROR
+  ROMANCE
+  ANIMACAO
+  DOCUMENTARIO
+  FICCAO_CIENTIFICA
+}
+
+model LancheCombo {
+  id            BigInt   @id @default(autoincrement())
+  nome          String
+  descricao     String
+  valorUnitario Float
+  qtUnidade     Int
+  subtotal      Float
+  pedidos       Pedido[]
+}
+
+model Filme {
+  id                 BigInt   @id @default(autoincrement())
+  titulo             String
+  sinopse            String
+  classificacao      String
+  duracao            DateTime
+  elenco             String
+  genero             Genero
+  dataInicioExibicao DateTime
+  dataFinalExibicao  DateTime
+  sessoes            Sessao[]
+  cinemaId           BigInt
+  cinema             Cinema   @relation(fields: [cinemaId], references: [id])
+}
+
+model Sala {
+  id         BigInt   @id @default(autoincrement())
+  numero     Int
+  capacidade Int
+  poltronas  Int[]
+  sessoes    Sessao[]
+  cinemaId   BigInt
+  cinema     Cinema   @relation(fields: [cinemaId], references: [id])
+}
+
+model Sessao {
+  id        BigInt     @id @default(autoincrement())
+  horario   DateTime
+  filmeId   BigInt
+  salaId    BigInt
+  ingressos Ingresso[]
+
+  filme    Filme  @relation(fields: [filmeId], references: [id])
+  sala     Sala   @relation(fields: [salaId], references: [id])
+  cinemaId BigInt
+  cinema   Cinema @relation(fields: [cinemaId], references: [id])
+}
+
+model Ingresso {
+  id           BigInt   @id @default(autoincrement())
+  valorInteira Float
+  valorMeia    Float
+  sessaoId     BigInt
+  pedidos      Pedido[]
+
+  sessao Sessao @relation(fields: [sessaoId], references: [id])
+}
+
+model Pedido {
+  id           BigInt        @id @default(autoincrement())
+  qntInteira   Int
+  qntMeia      Int
+  valorTotal   Float
+  ingressos    Ingresso[]
+  lancheCombos LancheCombo[]
+}
+
+model Cinema {
+  id       BigInt   @id @default(autoincrement())
+  nome     String
+  endereco String
+  salas    Sala[]
+  filmes   Filme[]
+  sessoes  Sessao[]
+}
