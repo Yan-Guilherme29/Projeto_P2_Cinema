@@ -7,9 +7,10 @@ import { FilmeModule } from './filme/filme.module';
 import { SalaModule } from './sala/sala.module';
 import { CinemaModule } from './cinema/cinema.module';
 import { SessaoModule } from './sessao/sessao.module';
+import { IngressoModule } from './ingresso/ingresso.module';
 
 @Module({
-  imports: [PrismaModule, LancheComboModule, FilmeModule, SalaModule, CinemaModule, SessaoModule],
+  imports: [PrismaModule, LancheComboModule, FilmeModule, SalaModule, CinemaModule, SessaoModule, IngressoModule],
   controllers: [AppController],
   providers: [AppService],
 })
