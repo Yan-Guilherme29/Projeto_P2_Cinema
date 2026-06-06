@@ -5,9 +5,10 @@ import { PrismaModule } from './prisma/prisma.module';
 import { LancheComboModule } from './lanche-combo/lanche-combo.module';
 import { FilmeModule } from './filme/filme.module';
 import { SalaModule } from './sala/sala.module';
+import { CinemaModule } from './cinema/cinema.module';
 
 @Module({
-  imports: [PrismaModule, LancheComboModule, FilmeModule, SalaModule],
+  imports: [PrismaModule, LancheComboModule, FilmeModule, SalaModule, CinemaModule],
   controllers: [AppController],
   providers: [AppService],
 })
