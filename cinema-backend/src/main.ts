@@ -7,15 +7,18 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // ValidationPipe global
+  // Serializer para BigInt
+  (BigInt.prototype as any).toJSON = function () {
+    return this.toString();
+  };
+
   app.useGlobalPipes(new ValidationPipe());
 
-  // Configuração do Swagger
   const config = new DocumentBuilder()
     .setTitle('API Cinema')
     .setDescription('API para gerenciamento de um sistema de cinema')
     .setVersion('1.0')
-    .addTag('cinema' )
+    .addTag('cinema')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
