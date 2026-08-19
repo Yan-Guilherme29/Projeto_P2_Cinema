@@ -82,6 +82,4 @@ Yan Guilherme Siqueira Gomides
 
 Estudante de Engenharia de Software com foco em desenvolvimento backend.
 
-🔗 GitHub
-
-🔗 LinkedIn
+- 💼 [LinkedIn](https://www.linkedin.com/in/yan-guilherme-dev-backend)
